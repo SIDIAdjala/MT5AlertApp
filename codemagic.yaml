@@ -1,0 +1,30 @@
+# codemagic.yaml
+workflows:
+  android-workflow:
+    name: Android Build Workflow
+    environment:
+      groups:
+        - keystore_credentials # Vous ajouterez cette groupe plus tard
+      vars:
+        BUNDLE: "false" # Set to true to build app bundle
+    scripts:
+      - name: Set up debug keystore properties
+        script: |
+          echo "storeFile=$HOME/.android/debug.keystore" >> $CM_BUILD_DIR/android-keystore.properties
+          echo "storePassword=android" >> $CM_BUILD_DIR/android-keystore.properties
+          echo "keyAlias=androiddebugkey" >> $CM_BUILD_DIR/android-keystore.properties
+          echo "keyPassword=android" >> $CM_BUILD_DIR/android-keystore.properties
+      - name: Build Android APK
+        script: |
+          cd $CM_BUILD_DIR
+          chmod +x ./gradlew
+          ./gradlew assembleRelease
+    artifacts:
+      - app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com # Remplacez par votre email
+        notify:
+          success: true
+          failure: true
