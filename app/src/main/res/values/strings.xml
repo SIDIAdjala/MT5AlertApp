@@ -1,0 +1,12 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<resources>
+    <string name="app_name">MT5 Alert</string>
+    <string name="instructions">
+        Instructions:\n
+        1. Enter your MT5 Scanner WebSocket URL\n
+        2. Select your preferred alert sound\n
+        3. Start the service to begin monitoring\n
+        4. The app will run in background and alert you when signals are received\n
+        5. Service will automatically restart after device reboot
+    </string>
+</resources>
